@@ -30,22 +30,66 @@ ul {
 }
 
 /* Task 2.1. Lay out the childs of the 'body' using Grid Template Areas. */
+/* Mobile first: alle Elemente untereinander (1 Spalte) */
+body {
+  display: grid; /* body wird zum Grid-Container */
+  grid-template-rows: auto auto 1fr auto; /* header, nav, main (wächst), footer */
+  grid-template-areas:
+     "h"  /* header */
+    "n"  /* nav */
+    "m"  /* main */
+    "f"; /* footer */
+}
+/* Jedem Element seinen Grid-Bereich zuweisen */
+header { grid-area: h; } /* header bekommt Bereich "h" */
+nav    { grid-area: n; } /* nav bekommt Bereich "n" */
+main   { grid-area: m; overflow-y: auto; } /* main bekommt Bereich "m", scrollbar wenn Inhalt zu groß */
+footer { grid-area: f; } /* footer bekommt Bereich "f" */
 
+/*Desktop Layout ab 600px Breite wechseln wir zum Grid-Layout*/
+@media (min-width: 600px) {
+  body {
+    grid-template-columns: 200px 1fr; /* nav 200px breit, main bekommt den Rest */
+    grid-template-rows: auto 1fr auto; /* header, main (wächst), footer */
+    grid-template-areas:
+      "h h"  /* header über beide Spalten */
+      "n m"  /* nav links, main rechts */
+      "f f"; /* footer über beide Spalten */
+  }
+}
 
 /* Task 3.1. Make the header element a flex container and center its children
    vertically and horizontally.
  */
-
+header {
+  display: flex; /* header wird zum Flexbox-Container */
+  justify-content: center; /* horizontal zentrieren */
+  align-items: center; /* vertikal zentrieren */
+}
 
 /* Task 3.2. Make the list items of the unordered list in the nav element a flex container, 
    use column direction and center the child items
  */
+nav ul {
+  display: flex; /* ul wird zum Flexbox-Container */
+  flex-direction: column; /* Buttons untereinander */
+  align-items: center; /* Buttons horizontal zentrieren */
+  width: 100%; /* volle Breite */
+}
 
 /* Task 3.3. Make the main element a Flexbox container */
-
+main {
+  display: flex; /* main wird zum Flexbox-Container */
+  flex-wrap: wrap; /* Filme umbrechen wenn kein Platz mehr */
+  gap: 8px; /* Abstand zwischen den Filmen */
+}
 
 /* Task 3.4. Make the footer's ul a Flexbox container */
-
+footer ul {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
 
 /* From here on styling from exercise 1 */
 img {
